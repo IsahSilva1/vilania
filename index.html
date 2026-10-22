@@ -3,31 +3,27 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#050705">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#030403">
 <title>ARQUIVO 0310 // SINAL DESCONHECIDO</title>
 
 <style>
 :root {
-  --bg: #050705;
-  --green: #b5ffb9;
-  --dim: #6a9c70;
-  --red: #ff2448;
-  --purple: #9e4bff;
-  --gold: #d7b66c;
+  --bg: #030403;
+  --green: #baffbd;
+  --dim: #648969;
+  --red: #ff173e;
+  --purple: #b04dff;
+  --gold: #e4c779;
 }
 
 * { box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
   background: var(--bg);
   color: var(--green);
-  font-family: "Courier New", monospace;
-  font-size: 14px;
-  line-height: 1.65;
+  font: 14px/1.65 "Courier New", monospace;
   overflow-x: hidden;
 }
 
@@ -35,14 +31,12 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  pointer-events: none;
   z-index: 20;
+  pointer-events: none;
   background: repeating-linear-gradient(
     to bottom,
-    transparent 0px,
-    transparent 2px,
-    rgba(0,0,0,.32) 3px,
-    rgba(0,0,0,.32) 4px
+    transparent 0 2px,
+    rgba(0,0,0,.32) 3px 4px
   );
 }
 
@@ -54,9 +48,9 @@ body::after {
   height: 200%;
   z-index: 19;
   pointer-events: none;
-  opacity: .08;
+  opacity: .075;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
-  animation: noise .18s steps(2) infinite;
+  animation: noise .16s steps(2) infinite;
 }
 
 @keyframes noise {
@@ -67,20 +61,11 @@ body::after {
   100% { transform: translate(-2%,-1%); }
 }
 
+@keyframes blink { 50% { opacity: 0; } }
+
 @keyframes flicker {
   0%, 18%, 22%, 62%, 64%, 100% { opacity: 1; }
-  20%, 63% { opacity: .78; }
-}
-
-@keyframes glitchText {
-  0%, 100% { transform: translateX(0); text-shadow: 0 0 transparent; }
-  20% { transform: translateX(-2px); text-shadow: 2px 0 #ff003c; }
-  40% { transform: translateX(2px); text-shadow: -2px 0 #00fff0; }
-  60% { transform: translateX(0); }
-}
-
-@keyframes blink {
-  50% { opacity: 0; }
+  20%, 63% { opacity: .7; }
 }
 
 @keyframes signalIn {
@@ -93,7 +78,7 @@ body::after {
 
 .page {
   width: min(100% - 30px, 760px);
-  margin: 0 auto;
+  margin: auto;
   padding: 24px 0 70px;
   position: relative;
   z-index: 1;
@@ -129,17 +114,7 @@ h1 {
   animation: flicker 6s infinite;
 }
 
-h2 {
-  font-size: 18px;
-  letter-spacing: 2px;
-  margin-top: 0;
-}
-
-h3 {
-  font-size: 14px;
-  letter-spacing: 1px;
-}
-
+h2 { font-size: 18px; letter-spacing: 2px; margin-top: 0; }
 p { margin: 12px 0; }
 
 .hero {
@@ -149,15 +124,8 @@ p { margin: 12px 0; }
   margin-bottom: 28px;
 }
 
-.hero-title {
-  animation: glitchText 5s infinite;
-}
-
-.warning {
-  color: var(--red);
-  font-size: 11px;
-  letter-spacing: 2px;
-}
+.hero-title { text-shadow: 2px 0 #ff003c, -2px 0 #00fff0; }
+.warning { color: var(--red); font-size: 11px; letter-spacing: 2px; }
 
 .terminal {
   border: 1px solid var(--dim);
@@ -180,8 +148,7 @@ p { margin: 12px 0; }
 }
 
 button, input {
-  font-family: inherit;
-  font-size: 14px;
+  font: inherit;
   border-radius: 0;
 }
 
@@ -210,49 +177,23 @@ input {
   color: var(--green);
   background: #020402;
   border: 1px solid var(--dim);
-  outline-offset: 3px;
 }
 
 input:focus-visible {
   outline: 2px solid var(--green);
+  outline-offset: 3px;
 }
 
 input::placeholder { color: #68846b; }
 
-.actions {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.error {
-  color: var(--red);
-  min-height: 22px;
-  font-size: 12px;
-}
-
+.actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.error { color: var(--red); min-height: 22px; font-size: 12px; }
 .hidden { display: none !important; }
 
-.progress {
-  display: flex;
-  gap: 7px;
-  margin: 22px 0;
-}
-
-.progress span {
-  height: 4px;
-  flex: 1;
-  background: #1a281b;
-}
-
+.progress { display: flex; gap: 7px; margin: 22px 0; }
+.progress span { height: 4px; flex: 1; background: #1a281b; }
 .progress span.done { background: var(--green); }
-
-.file-number {
-  font-size: 11px;
-  color: var(--dim);
-  letter-spacing: 2px;
-}
+.file-number { font-size: 11px; color: var(--dim); letter-spacing: 2px; }
 
 pre {
   white-space: pre-wrap;
@@ -263,7 +204,7 @@ pre {
 
 .reveal {
   border: 1px solid var(--purple);
-  background: rgba(18,5,24,.9);
+  background: rgba(18,5,24,.94);
   padding: 22px 17px;
   margin-top: 25px;
   animation: signalIn .7s steps(4) both;
@@ -286,11 +227,7 @@ pre {
   overflow-wrap: anywhere;
 }
 
-.event-line {
-  text-align: center;
-  color: #f1dca6;
-  letter-spacing: 1px;
-}
+.event-line { text-align: center; color: #f1dca6; letter-spacing: 1px; }
 
 .event-details {
   border-top: 1px dashed var(--gold);
@@ -310,102 +247,171 @@ footer {
   text-align: center;
 }
 
-/* JUMPSCARE VISUAL, SEM ÁUDIO */
+/* TRANSMISSÃO INTERROMPIDA */
 #scareOverlay {
   position: fixed;
   inset: 0;
   z-index: 1000;
   display: none;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
   background: #000;
-}
-
-#scareOverlay.active {
-  display: flex;
-  animation: scareFlash 1.35s steps(2,end) both;
-}
-
-.scare-face {
-  width: min(100vw, 600px);
-  height: min(100dvh, 800px);
-  position: relative;
-  display: flex;
+  overflow: hidden;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(
-    ellipse at 50% 45%,
-    #6b1029 0%,
-    #260711 40%,
-    #000 75%
-  );
-  animation: faceGlitch .09s steps(2) infinite;
 }
 
-.scare-face svg {
-  width: 100%;
-  height: 90%;
-  filter: drop-shadow(0 0 15px #ff003c);
-}
+#scareOverlay.active { display: flex; }
 
-.scare-face::before {
-  content: "";
+.scare-scene {
   position: absolute;
   inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent 0 2px,
-    #fff3 3px,
-    #000a 4px
-  );
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.scare-label, .scare-bottom {
+.scare-status {
   position: absolute;
-  z-index: 3;
+  top: 8%;
   left: 0;
   width: 100%;
   text-align: center;
+  color: #ddd;
   font-size: 11px;
   letter-spacing: 3px;
-  padding: 0 8px;
-  overflow-wrap: anywhere;
-}
-
-.scare-label {
-  top: 8%;
-  color: #ff2448;
-  text-shadow: 2px 0 #00fff0, -2px 0 #ff003c;
+  z-index: 5;
 }
 
 .scare-bottom {
+  position: absolute;
   bottom: 8%;
-  color: white;
-  animation: blink .15s steps(2) infinite;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: var(--red);
+  font-size: 11px;
+  letter-spacing: 3px;
+  z-index: 5;
 }
 
-@keyframes scareFlash {
-  0% { opacity: 0; }
-  5%, 18%, 31%, 45%, 64% { opacity: 1; }
-  12%, 25%, 39%, 55% { opacity: .22; }
-  100% { opacity: 0; }
+/* A figura surge perto demais da câmera */
+.figure {
+  position: absolute;
+  width: min(125vw, 850px);
+  height: min(125dvh, 1000px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(1.8);
+  filter: contrast(1.7);
 }
 
-@keyframes faceGlitch {
-  0%,100% { transform: translate(0,0) skew(0); }
-  25% { transform: translate(7px,-3px) skew(-2deg); }
-  50% { transform: translate(-8px,2px) skew(3deg); }
-  75% { transform: translate(3px,5px) skew(-1deg); }
+.figure svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+#scareOverlay.active .figure {
+  animation: figureAppear 1.6s steps(1,end) forwards;
+}
+
+@keyframes figureAppear {
+  0%, 15% {
+    opacity: 0;
+    transform: scale(1.5) translateX(0);
+  }
+  16% {
+    opacity: 1;
+    transform: scale(2.2) translateX(-2%);
+  }
+  20% {
+    opacity: .12;
+    transform: scale(2.1) translateX(3%);
+  }
+  23% {
+    opacity: 1;
+    transform: scale(2.4) translateX(-1%);
+  }
+  29% {
+    opacity: 0;
+    transform: scale(2.2);
+  }
+  35% {
+    opacity: 1;
+    transform: scale(2.7) translateX(2%);
+  }
+  42% {
+    opacity: .2;
+    transform: scale(2.4) translateX(-4%);
+  }
+  48%, 75% {
+    opacity: 1;
+    transform: scale(2.8) translateX(0);
+  }
+  82% {
+    opacity: .1;
+    transform: scale(3.1) translateX(3%);
+  }
+  90%, 100% {
+    opacity: 0;
+    transform: scale(3.4);
+  }
+}
+
+/* Cortes e barras de interferência */
+.glitch-bar {
+  position: absolute;
+  left: -10%;
+  width: 120%;
+  height: 4%;
+  background: rgba(255,255,255,.85);
+  mix-blend-mode: screen;
+  opacity: 0;
+  z-index: 4;
+}
+
+#scareOverlay.active .glitch-bar {
+  animation: barFlash .22s steps(2) 5;
+}
+
+.glitch-bar.one { top: 22%; }
+.glitch-bar.two { top: 58%; animation-delay: .07s !important; }
+.glitch-bar.three { top: 74%; animation-delay: .12s !important; }
+
+@keyframes barFlash {
+  0%, 100% { opacity: 0; transform: translateX(-10%); }
+  50% { opacity: .9; transform: translateX(8%); }
+}
+
+.blackout {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  opacity: 0;
+  z-index: 6;
+  pointer-events: none;
+}
+
+#scareOverlay.active .blackout {
+  animation: blackout 1.65s steps(1,end) forwards;
+}
+
+@keyframes blackout {
+  0%, 12%, 21%, 30%, 39%, 48%, 61% { opacity: 0; }
+  13%, 20%, 31%, 38%, 62%, 100% { opacity: 1; }
+  49%, 60% { opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    scroll-behavior: auto !important;
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
+  body::after { animation: none; }
+  h1 { animation: none; }
+  #scareOverlay.active .figure,
+  #scareOverlay.active .glitch-bar,
+  #scareOverlay.active .blackout {
+    animation-duration: .01ms;
+    animation-iteration-count: 1;
   }
 }
 </style>
@@ -413,7 +419,6 @@ footer {
 
 <body>
 
-<!-- ABERTURA DA TRANSMISSÃO -->
 <div id="boot" style="
   position:fixed; inset:0; z-index:2000; background:#020402;
   display:flex; align-items:center; justify-content:center;
@@ -434,71 +439,99 @@ footer {
   </div>
 </div>
 
-<!-- JUMPSCARE: NÃO CONTÉM ÁUDIO -->
+<!-- SUSTO VISUAL: SEM ÁUDIO -->
 <div id="scareOverlay" aria-hidden="true">
-  <div class="scare-face">
-    <div class="scare-label">SIGNAL CORRUPTED // 0310</div>
+  <div class="scare-scene">
+    <div class="scare-status">ERRO 0310 // SINAL INTERROMPIDO</div>
 
-    <svg viewBox="0 0 400 560" role="img"
-      aria-label="Rosto distorcido por interferências de televisão">
-      <defs>
-        <radialGradient id="skin" cx="50%" cy="35%" r="70%">
-          <stop offset="0%" stop-color="#8c3049"/>
-          <stop offset="55%" stop-color="#35101f"/>
-          <stop offset="100%" stop-color="#080308"/>
-        </radialGradient>
-        <filter id="warp">
-          <feTurbulence type="fractalNoise"
-            baseFrequency=".035 .12" numOctaves="2"
-            seed="8" result="noise"/>
-          <feDisplacementMap in="SourceGraphic" in2="noise"
-            scale="17" xChannelSelector="R" yChannelSelector="G"/>
-        </filter>
-      </defs>
+    <div class="figure">
+      <svg viewBox="0 0 400 560" role="img"
+        aria-label="Figura humana distorcida na transmissão">
+        <defs>
+          <radialGradient id="faceShade" cx="50%" cy="40%" r="70%">
+            <stop offset="0%" stop-color="#8c5260"/>
+            <stop offset="48%" stop-color="#3d1824"/>
+            <stop offset="100%" stop-color="#020102"/>
+          </radialGradient>
+          <filter id="distort">
+            <feTurbulence type="fractalNoise"
+              baseFrequency=".025 .13" numOctaves="2" seed="13"
+              result="noise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise"
+              scale="28" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+        </defs>
 
-      <g filter="url(#warp)">
-        <path d="M65 560 Q95 450 105 350 L83 230
-          Q82 100 200 65 Q320 85 318 230
-          L295 365 Q320 475 345 560Z"
-          fill="url(#skin)" stroke="#a32a48" stroke-width="3"/>
+        <g filter="url(#distort)">
+          <!-- Cabeça e pescoço -->
+          <path d="M70 560 Q90 455 115 400
+            L85 265 Q55 100 200 35
+            Q345 85 315 265 L285 405
+            Q325 480 340 560Z"
+            fill="url(#faceShade)" stroke="#5c2936" stroke-width="4"/>
 
-        <path d="M90 215 L175 190 L190 240 L105 255Z"
-          fill="#030205"/>
-        <path d="M220 205 L312 180 L300 252 L218 246Z"
-          fill="#030205"/>
+          <!-- Sombras profundas nas órbitas -->
+          <path d="M70 210 L180 170 L190 260 L95 275Z"
+            fill="#000"/>
+          <path d="M218 175 L330 205 L304 275 L215 258Z"
+            fill="#000"/>
 
-        <ellipse cx="146" cy="225" rx="28" ry="12" fill="#ff183f"/>
-        <ellipse cx="265" cy="220" rx="27" ry="13" fill="#ff183f"/>
-        <circle cx="146" cy="225" r="7" fill="#fff"/>
-        <circle cx="265" cy="220" r="7" fill="#fff"/>
+          <!-- Olhos claros, quase sem pupila -->
+          <path d="M93 225 Q135 185 177 220 Q145 250 93 225Z"
+            fill="#e9d7d5"/>
+          <path d="M224 220 Q273 183 309 225 Q264 251 224 220Z"
+            fill="#e9d7d5"/>
+          <ellipse cx="140" cy="222" rx="9" ry="17" fill="#090308"/>
+          <ellipse cx="269" cy="221" rx="9" ry="17" fill="#090308"/>
 
-        <path d="M190 225 L168 320 L220 312"
-          fill="none" stroke="#12060c" stroke-width="15"/>
+          <!-- Nariz alongado -->
+          <path d="M191 222 L164 333 L203 347 L225 331"
+            fill="#17080e" stroke="#54202e" stroke-width="7"/>
 
-        <path d="M120 355 Q200 315 290 350
-          L280 430 Q200 470 125 420Z"
-          fill="#050205" stroke="#e51b43" stroke-width="5"/>
+          <!-- Boca larga e antinatural -->
+          <path d="M105 376 Q200 335 300 375
+            L287 432 Q205 475 118 431Z"
+            fill="#020102" stroke="#8e243a" stroke-width="6"/>
 
-        <path d="M130 360 L270 360 M132 385 L270 385
-          M142 410 L260 410"
-          stroke="#e5c9ce" stroke-width="10"/>
+          <!-- Dentes irregulares -->
+          <path d="M119 378 L142 381 L139 407 L123 401Z
+            M148 374 L170 372 L170 405 L151 404Z
+            M180 369 L203 369 L202 402 L181 402Z
+            M211 369 L235 373 L232 405 L211 402Z
+            M243 374 L267 381 L258 406 L239 403Z"
+            fill="#d9c9c8"/>
 
-        <path d="M110 160 L180 180 M220 180 L300 145"
-          stroke="#e51b43" stroke-width="8"/>
-      </g>
+          <!-- Rachaduras e distorções -->
+          <path d="M110 142 L155 175 L143 193
+            M285 125 L250 170 L267 189
+            M110 304 L148 323 L130 348"
+            fill="none" stroke="#bd1e40" stroke-width="6"/>
 
-      <g opacity=".8" fill="#fff">
-        <rect x="25" y="180" width="90" height="5"/>
-        <rect x="250" y="285" width="120" height="4"/>
-        <rect x="60" y="440" width="180" height="3"/>
-      </g>
-    </svg>
+          <!-- Pescoço desaparecendo na escuridão -->
+          <path d="M125 440 L145 560 M275 440 L255 560"
+            stroke="#14050b" stroke-width="28"/>
+        </g>
+
+        <!-- Linhas digitais sobre a imagem -->
+        <g fill="#fff" opacity=".8">
+          <rect x="20" y="170" width="100" height="4"/>
+          <rect x="245" y="286" width="130" height="3"/>
+          <rect x="55" y="455" width="170" height="3"/>
+          <rect x="180" y="100" width="65" height="2"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="glitch-bar one"></div>
+    <div class="glitch-bar two"></div>
+    <div class="glitch-bar three"></div>
+    <div class="blackout"></div>
 
     <div class="scare-bottom">NÃO DESLIGUE O RECEPTOR</div>
   </div>
 </div>
 
-<div class="page" id="mainPage">
+<main class="page" id="mainPage">
 
   <header>
     <span><span class="rec">● REC</span> <span id="clock">03:10:31</span></span>
@@ -543,9 +576,9 @@ MÊS: ██
 
     <p>Em qual data o sinal retorna?</p>
 
-    <form onsubmit="event.preventDefault(); check(1);">
+    <form id="form1">
       <label for="a1">INSIRA A DATA:</label>
-      <input id="a1" name="answer1" autocomplete="off"
+      <input id="a1" autocomplete="off"
         placeholder="DD/MM" aria-describedby="e1" required>
       <div class="actions">
         <button type="submit">[ DECODIFICAR ]</button>
@@ -575,9 +608,9 @@ O sistema tenta apagar seu nome.
 
     <p>Como são chamados aqueles que se recusam a seguir as regras dos heróis?</p>
 
-    <form onsubmit="event.preventDefault(); check(2);">
+    <form id="form2">
       <label for="a2">INSIRA A CLASSIFICAÇÃO:</label>
-      <input id="a2" name="answer2" autocomplete="off"
+      <input id="a2" autocomplete="off"
         placeholder="NOME DA CATEGORIA" aria-describedby="e2" required>
       <div class="actions">
         <button type="submit">[ RECUPERAR DADO ]</button>
@@ -612,9 +645,9 @@ NOME: ███████
 
     <p>Qual é o nome que conecta todos os arquivos?</p>
 
-    <form onsubmit="event.preventDefault(); check(3);">
+    <form id="form3">
       <label for="a3">INSIRA O NOME:</label>
-      <input id="a3" name="answer3" autocomplete="off"
+      <input id="a3" autocomplete="off"
         placeholder="NOME DA TRANSMISSÃO" aria-describedby="e3" required>
       <div class="actions">
         <button type="submit">[ REVELAR ORIGEM ]</button>
@@ -670,22 +703,20 @@ QUEM INICIOU ESTA TRANSMISSÃO.
     ARQUIVO 0310 // SINAL DESCONHECIDO<br>
     SE ESTA MENSAGEM FOI RECUPERADA, VOCÊ JÁ FAZ PARTE DO REGISTRO.
   </footer>
-</div>
+</main>
 
 <script>
 const boot = document.getElementById("boot");
-const startButton = document.getElementById("startButton");
 const overlay = document.getElementById("scareOverlay");
 
 let scarePlayed = false;
 
-startButton.addEventListener("click", () => {
+document.getElementById("startButton").addEventListener("click", () => {
   boot.style.display = "none";
   document.getElementById("mainPage").style.animation =
     "signalIn .7s steps(4) both";
 });
 
-/* RESPOSTAS DOS TRÊS ENIGMAS */
 function normalize(value) {
   return value
     .normalize("NFD")
@@ -697,7 +728,7 @@ function normalize(value) {
 
 const answers = {
   1: ["31/10", "3110", "31.10", "31-10"],
-  2: ["vilao", "vilaos", "vilões", "viloes"],
+  2: ["vilao", "viloes"],
   3: ["vilania"]
 };
 
@@ -716,51 +747,45 @@ function check(n) {
   document.getElementById("stage" + n).classList.add("hidden");
   document.getElementById("p" + n).classList.add("done");
 
-  if (n === 1) {
-    const nextStage = document.getElementById("stage2");
-    nextStage.classList.remove("hidden");
-
-    /* JUMPSCARE ÚNICO: AO DESBLOQUEAR O SEGUNDO ENIGMA */
-    if (!scarePlayed) {
-      scarePlayed = true;
-      window.setTimeout(() => {
-        overlay.classList.add("active");
-        overlay.setAttribute("aria-hidden", "false");
-
-        window.setTimeout(() => {
-          overlay.classList.remove("active");
-          overlay.setAttribute("aria-hidden", "true");
-          document.getElementById("a2").focus({ preventScroll: true });
-        }, 1400);
-      }, 350);
-    }
-
-    nextStage.scrollIntoView({ behavior: "smooth", block: "center" });
-    return;
-  }
-
-  if (n === 2) {
-    const nextStage = document.getElementById("stage3");
+  if (n === 1 || n === 2) {
+    const nextStage = document.getElementById("stage" + (n + 1));
     nextStage.classList.remove("hidden");
     nextStage.scrollIntoView({ behavior: "smooth", block: "center" });
     return;
   }
 
-  if (n === 3) {
-    const reveal = document.getElementById("reveal");
-    reveal.classList.remove("hidden");
-    reveal.focus({ preventScroll: true });
-    reveal.scrollIntoView({ behavior: "smooth", block: "start" });
+  if (n === 3 && !scarePlayed) {
+    scarePlayed = true;
+
+    // Interrompe a transmissão após a resposta final.
+    overlay.classList.add("active");
+    overlay.setAttribute("aria-hidden", "false");
+
+    // O susto termina e a revelação aparece automaticamente.
+    window.setTimeout(() => {
+      overlay.classList.remove("active");
+      overlay.setAttribute("aria-hidden", "true");
+
+      const reveal = document.getElementById("reveal");
+      reveal.classList.remove("hidden");
+      reveal.focus({ preventScroll: true });
+      reveal.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 1700);
   }
 }
 
-/* RELÓGIO ESTÉTICO DA TRANSMISSÃO */
-let seconds = 31;
+[1, 2, 3].forEach(n => {
+  document.getElementById("form" + n).addEventListener("submit", event => {
+    event.preventDefault();
+    check(n);
+  });
+});
 
+let seconds = 31;
 window.setInterval(() => {
   seconds = (seconds + 1) % 60;
-  const clock = document.getElementById("clock");
-  clock.textContent = "03:10:" + String(seconds).padStart(2, "0");
+  document.getElementById("clock").textContent =
+    "03:10:" + String(seconds).padStart(2, "0");
 }, 1000);
 </script>
 
