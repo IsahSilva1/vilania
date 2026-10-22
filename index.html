@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#100817">
+<title>ARQUIVO 0310 | VILANIA</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@300;400;600;700&display=swap');
+:root{--bg:#100817;--purple:#8d48c4;--gold:#d8b56d;--white:#f3eaf7}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at top,#351446 0%,#100817 55%,#050307 100%);color:var(--white);font-family:Montserrat,sans-serif;min-height:100vh}
+body:before{content:"";position:fixed;inset:12px;border:1px solid #8d48c455;pointer-events:none}
+main{width:min(680px,100%);margin:auto;padding:55px 26px 70px;text-align:center}
+.sig{color:var(--gold);font-size:11px;letter-spacing:5px}
+h1,h2{font-family:Cinzel,serif;text-transform:uppercase}
+h1{font-size:clamp(42px,12vw,82px);line-height:1;margin:24px 0 12px;color:#e6c5ff;text-shadow:0 0 30px #9b4dcc88}
+h2{font-size:clamp(22px,6vw,34px);color:var(--gold)}
+.line{height:1px;width:100px;background:var(--gold);margin:25px auto}
+p{line-height:1.8;color:#d8cbdc;font-size:14px}
+.card{border:1px solid #8d48c477;background:#170c20cc;padding:27px 20px;margin:28px 0;box-shadow:0 0 30px #0005}
+input{width:100%;padding:15px;background:#0b0610;border:1px solid #775087;color:white;font-size:16px;text-align:center;margin:12px 0;outline:none}
+button{background:var(--purple);border:1px solid var(--gold);color:white;padding:14px 22px;font-family:Montserrat,sans-serif;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;width:100%;margin-top:8px}
+button:hover{background:#a45bd8}
+.small{font-size:10px;letter-spacing:3px;color:var(--gold)}
+.hidden{display:none}
+.error{color:#ff9eae;font-size:12px}
+.clue{font-family:Cinzel,serif;font-size:20px;color:#fff}
+#invite{border:1px solid var(--gold);padding:24px 18px;background:linear-gradient(#26102f,#100817)}
+.djs{color:#e6c5ff;font-family:Cinzel,serif;line-height:2}
+footer{font-size:10px;letter-spacing:3px;color:#796481;margin-top:45px}
+</style>
+</head>
+<body>
+<main>
+<div class="sig">ELITE PROUD APRESENTA</div>
+<h1>ARQUIVO<br>0310</h1>
+<div class="line"></div>
+<p>Alguns convites não são entregues.<br>São descobertos.</p>
+<p>Um arquivo foi aberto. Três enigmas separam você da verdade.<br>Se chegou até aqui, talvez já faça parte da história.</p>
+
+<section class="card" id="stage1">
+<div class="small">ARQUIVO 01 — A DATA</div>
+<h2>Quando?</h2>
+<p>Uma noite se aproxima. O último dia de outubro guarda mais do que doces e fantasias. Digite a data no formato DD/MM.</p>
+<input id="a1" placeholder="DD/MM" autocomplete="off">
+<button onclick="check(1)">Desbloquear</button>
+<p class="error" id="e1"></p>
+</section>
+
+<section class="card hidden" id="stage2">
+<div class="small">ARQUIVO 02 — A IDENTIDADE</div>
+<h2>Quem?</h2>
+<p class="clue">“Heróis contam histórias sobre salvar o mundo.<br>Vilões preferem escrever o final.”</p>
+<p>Que tipo de personagem está convocando você para esta noite?</p>
+<input id="a2" placeholder="Sua resposta" autocomplete="off">
+<button onclick="check(2)">Desbloquear</button>
+<p class="error" id="e2"></p>
+</section>
+
+<section class="card hidden" id="stage3">
+<div class="small">ARQUIVO 03 — A PALAVRA FINAL</div>
+<h2>O chamado</h2>
+<p>Não somos os heróis desta história. Somos aquilo que eles temem se tornar.</p>
+<p>Complete o nome desta convocação: V I L A _ I A</p>
+<input id="a3" placeholder="Palavra final" autocomplete="off">
+<button onclick="check(3)">Revelar o arquivo</button>
+<p class="error" id="e3"></p>
+</section>
+
+<section class="card hidden" id="reveal">
+<div class="small">ACESSO CONCEDIDO</div>
+<h2>VOCÊS FORAM CONVOCADOS</h2>
+<p>O arquivo não era um aviso. Era um convite.</p>
+<div class="line"></div>
+<div id="invite">
+<div class="sig">ELITE PROUD</div>
+<h1 style="font-size:clamp(42px,12vw,68px)">VILANIA</h1>
+<p>O REINO PERTENCE AOS VILÕES.</p>
+<p>Uma noite onde os heróis não são bem-vindos.</p>
+<div class="line"></div>
+<h2>31.10</h2>
+<p>SÁBADO · HALLOWEEN</p>
+<div class="djs">MYRELLA DANTAS<br>BACORACINI<br>STEFANY ARAÚJO</div>
+<div class="line"></div>
+<p><strong>MANSÃO SÓ FARRA</strong><br>R. Cesário Galero, 395</p>
+<p style="color:var(--gold)">VISTA SEU LADO SOMBRIO.</p>
+</div>
+<p>O convite foi revelado. O resto depende de você.</p>
+</section>
+<footer>ELITE PROUD · ACESSO RESTRITO · 0310</footer>
+</main>
+<script>
+function normalize(s){return s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim()}
+function check(n){
+ const val=document.getElementById("a"+n).value;
+ const answers={1:["31/10","3110","31.10","31-10"],2:["vilao","vilaos","vilã","vilões","viloes"],3:["vilania"]};
+ const ok=answers[n].includes(normalize(val));
+ const err=document.getElementById("e"+n);
+ if(!ok){err.textContent="Acesso negado. Releia as pistas e tente novamente.";return}
+ err.textContent="";
+ document.getElementById("stage"+n).classList.add("hidden");
+ if(n<3){document.getElementById("stage"+(n+1)).classList.remove("hidden");document.getElementById("stage"+(n+1)).scrollIntoView({behavior:"smooth",block:"center"})}
+ else{document.getElementById("reveal").classList.remove("hidden");document.getElementById("reveal").scrollIntoView({behavior:"smooth",block:"start"})}
+}
+document.querySelectorAll("input").forEach((el,i)=>el.addEventListener("keydown",e=>{if(e.key==="Enter")check(i+1)}));
+</script>
+</body>
+</html>
